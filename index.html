@@ -1,139 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Join Form</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Club Application Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(120deg, #c0a0ff, #a0d8ff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #4facfe, #8e44ad);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
+        form {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            width: 400px;
+        }
 
-    .form-container {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      width: 350px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
+        h2 {
+            text-align: center;
+            color: #5a00d4;
+            margin-bottom: 25px;
+            font-family: 'Verdana', sans-serif;
+        }
 
-    h2 {
-      text-align: center;
-      color: #6a11cb;
-    }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #4b0082;
+        }
 
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 10px;
-    }
+        input, textarea, select {
+            width: 100%;
+            margin-top: 5px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #aaa;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
 
-    input, select, textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
+        input[type="radio"] {
+            width: auto;
+            margin-right: 5px;
+        }
 
-    textarea {
-      resize: none;
-    }
+        .section {
+            margin-bottom: 20px;
+        }
 
-    .radio-group {
-      margin-top: 5px;
-    }
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #6a0dad, #00bfff);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-    button {
-      margin-top: 15px;
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #4facfe, #8e44ad);
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
 
-    .hidden {
-      display: none;
-    }
-  </style>
+        #which_club_section {
+            display: none; /* hidden by default */
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="form-container">
-  <h2>Join Us</h2>
+    <form id="clubForm">
+        <h2>Club Application Form</h2>
 
-  <form action="https://formspree.io/f/xjgproay" method="POST">
+        <div class="section">
+            <label>Name:</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+           <div class="section">
+            <label>email:</label>
+            <input type="email" name="mail" id="mail" required>
+        </div>
+           <div class="section">
+            <label>numero :</label>
+            <input type="number" name="num" id="num" required>
+        </div>
 
-    <label>Full Name</label>
-    <input type="text" required>
+        <div class="section">
+            <label>Talk about yourself:</label>
+            <textarea name="about" id="about" rows="4" placeholder="Write a few lines about the person ..." required></textarea>
+        </div>
 
-    <label>Email</label>
-    <input type="email" required>
+        <div class="section">
+            <label>What do you want to learn?</label>
+            <textarea name="learn" id="learn" rows="5" required></textarea>
+        </div>
 
-    <label>Facebook Profile</label>
-    <input type="text"  placeholder="important">
+        <!-- New Question: Where did you hear about our club? -->
+        <div class="section">
+            <label>Where did you hear about our club?</label>
+            <input type="text" name="hear_about" id="hear_about" placeholder="e.g., social media, friend, poster" required>
+        </div>
 
-    <label>Grade</label>
-    <input type="text" required>
+        <div class="section">
+            <label>Have you been part of the club before?</label>
+            <input type="radio" name="club_previous" id="club_yes" value="yes" required> Yes
+            <input type="radio" name="club_previous" id="club_no" value="no" required> No
+        </div>
 
-    <label>Do you have skills?</label>
-    <div class="radio-group">
-      <input type="radio" name="skills" onclick="showSkills()"> Yes
-      <input type="radio" name="skills" onclick="showLearning()"> No
-    </div>
+        <div class="section" id="which_club_section">
+            <label>Which club?</label>
+            <input type="text" name="which_club" id="which_club" placeholder="Name of the previous club">
+        </div>
 
-    <!-- SHOW IF YES -->
-    <div id="skillsBox" class="hidden">
-      <label>List your skills</label>
-      <textarea rows="2"></textarea>
-    </div>
+        <div class="section">
+            <label>Which department interests you the most?</label>
+            <select name="department" id="department" required>
+                <option value="hr">HR</option>
+                <option value="marketing">Media</option>
+                <option value="sponsoring">Sponsoring</option>
+                <option value="management">Management</option>
+            </select>
+        </div>
 
-    <!-- SHOW IF NO -->
-    <div id="learningBox" class="hidden">
-      <label>What do you want to learn?</label>
-      <textarea rows="2"></textarea>
-    </div>
+        <div class="section">
+            <label>How much time can you dedicate to the club?</label>
+            <input type="text" name="time_commitment" id="time_commitment" required>
+        </div>
 
-    <label>Have you been part of a club before?</label>
-    <div class="radio-group">
-      <input type="radio" name="club" value="yes"> Yes
-      <input type="radio" name="club" value="no"> No
-    </div>
+        <button type="submit">Submit</button>
+    </form>
 
-    <label>Work Preference</label>
-    <select>
-      <option>Work Alone</option>
-      <option>Work in a Group</option>
-    </select>
+    <script>
+        // Show/hide "Which club?" based on previous selection
+        const yesRadio = document.getElementById('club_yes');
+        const noRadio = document.getElementById('club_no');
+        const whichClubSection = document.getElementById('which_club_section');
 
-    <button type="submit">Submit</button>
+        yesRadio.addEventListener('change', () => {
+            if (yesRadio.checked) {
+                whichClubSection.style.display = 'block';
+            }
+        });
 
-  </form>
-</div>
-
-<script>
-  function showSkills() {
-    document.getElementById("skillsBox").classList.remove("hidden");
-    document.getElementById("learningBox").classList.add("hidden");
-  }
-
-  function showLearning() {
-    document.getElementById("learningBox").classList.remove("hidden");
-    document.getElementById("skillsBox").classList.add("hidden");
-  }
-</script>
+        noRadio.addEventListener('change', () => {
+            if (noRadio.checked) {
+                whichClubSection.style.display = 'none';
+            }
+        });
+    </script>
 
 </body>
 </html>
